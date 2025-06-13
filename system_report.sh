@@ -33,7 +33,7 @@ ip=$(ip -4 addr show "$iface" | grep inet | awk '{print $2}' | cut -d/ -f1)
 gateway=$(ip route | awk '/default/ {print $3}')
 dns=$(grep nameserver /etc/resolv.conf | awk '{print $2}' | paste -sd ', ')
 
-echo "Host IP Address $ip"
+echo "Host IP Address: $ip"
 echo "Gateway IP: $gateway"
 echo "DNS: $dns"
 

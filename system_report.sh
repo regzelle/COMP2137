@@ -22,7 +22,7 @@ echo "CPU: $(lshw -class processor | grep "product" | head -n 1 | cut -d: -f2 | 
 echo "RAM: $(free -h | awk '/Mem/ {print $2}')"
 
 # Disk Information
-echo -n "Disks: $(lsblk -d -o NAME,SIZE,MODEL)"
+echo -n "Disks: $(lshw -class disk 2>/dev/null | awk -F: '/product:/{gsub(/^[ \t]+/, "", $2); printf "%s", $2} /size:/{gsub(/^[ \t]+/, "", $2); printf " - %s\n", $2}')"
 
 # Video card Information
 echo "Video Card: $(lshw -C display 2>/dev/null | grep product | cut -d: -f2 | sed 's/^[ \t]*//')"
